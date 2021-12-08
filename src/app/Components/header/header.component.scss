@@ -1,0 +1,15 @@
+.container {
+    font-family: 'Roboto', sans-serif;
+    position: absolute;
+    width: 1300px;
+    height: 130px;
+    left: 0px;
+    top: -27px;
+    background-color: black;
+}
+
+@media screen and (min-width: 1250px) {
+    .container {
+        width: 100%;
+    }
+}
