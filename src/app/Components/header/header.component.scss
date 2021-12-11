@@ -1,11 +1,21 @@
-.container {
-    font-family: 'Roboto', sans-serif;
-    position: absolute;
-    width: 1300px;
-    height: 130px;
-    left: 0px;
-    top: -27px;
-    background-color: black;
+// .container {
+//     font-family: 'Roboto', sans-serif;
+//     position: absolute;
+//     width: 1300px;
+//     height: 130px;
+//     left: 0px;
+//     top: -27px;
+//     // background-color: black;
+// }
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+    // padding: 90px;
+    font-size: 30px;
+    text-align: center;
 }
 
 @media screen and (min-width: 1250px) {
