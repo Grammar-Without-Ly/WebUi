@@ -1,21 +1,27 @@
-// .container {
-//     font-family: 'Roboto', sans-serif;
-//     position: absolute;
-//     width: 1300px;
-//     height: 130px;
-//     left: 0px;
-//     top: -27px;
-//     // background-color: black;
-// }
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.grid-item {
-    // padding: 90px;
-    font-size: 30px;
-    text-align: center;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.navbar-nav {
+    list-style: none;
+}
+
+.navbar-nav li {
+    display: inline-block;
+    padding: 0px 10px;
 }
 
 @media screen and (min-width: 1250px) {
