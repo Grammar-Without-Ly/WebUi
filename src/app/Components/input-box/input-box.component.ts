@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./input-box.component.scss']
 })
 export class InputBoxComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
   }
