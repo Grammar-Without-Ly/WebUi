@@ -1,9 +1,9 @@
 <div class="container">
     <div class="text-box" id="text-area">
-        <textarea placeholder="Enter or paste your text here to check it..." style="font-family: 'Roboto', sans-serif;"></textarea>
+        <textarea #box (keyup)="onKey(box.value)" placeholder="Enter or paste your text here to check it..." style="font-family: 'Roboto', sans-serif;"></textarea>
 
     </div>
     <div class="box-countword">
-        <p style="float: right;">word: character: </p>
+        <p style="float: right;">word: {{words}} character: {{characters}} </p>
     </div>
 </div>
