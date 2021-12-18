@@ -1,7 +1,7 @@
 <div class="container">
     <div class="text-box" id="text-area">
         <textarea #box (keyup)="onKey(box.value)" placeholder="Enter or paste your text here to check it..." style="font-family: 'Roboto', sans-serif;"></textarea>
-
+        <input *ngIf="showRightIcon" type="image" src="../../../assets/left-icon.png" style="height: 20px;" alt="text">
     </div>
     <div class="box-countword">
         <p style="float: right;">word: {{words}} character: {{characters}} </p>
