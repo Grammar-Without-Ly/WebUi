@@ -17,7 +17,7 @@ export class InputBoxComponent implements OnInit {
   wordSubject: BehaviorSubject<any> = new BehaviorSubject([]);
   words: Observable<any> = of([]);
   showRightIcon: boolean = false;
-  inputValue: string = 'hello';
+  inputValue: string = '';
 
   ngOnInit(): void {
     let words = this.inputValue.split(' ')
