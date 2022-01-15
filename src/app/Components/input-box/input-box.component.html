@@ -1,13 +1,8 @@
 <div class="container">
-    <div class="text-box" id="text-area">
-        <input #box
-                  [(ngModel)]="inputValue"
-                  (ngModelChange)="onKey()"
-                  (keyup.enter)="checkValidInput()"
-                  placeholder="Enter or paste your text here to check it..."
-                  style="font-family: 'Roboto', sans-serif;">
-      <p>
-        <span *ngFor="let word of WordObservable | async">{{word.text}} </span>
-      </p>
+    <div class="text-box">
+        <input [(ngModel)]="inputValue" (ngModelChange)="onKey()" (keyup.enter)="checkValidInput()" placeholder="Enter or paste your text here to check it..." style="font-family: 'Roboto', sans-serif;">
+        <p>
+            <!-- <span *ngFor="let word of WordObservable | async">{{word.text}} </span> -->
+        </p>
     </div>
 </div>
