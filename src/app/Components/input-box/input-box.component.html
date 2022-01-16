@@ -1,13 +1,34 @@
 <div class="container">
-    <div class="text-box" id="text-area">
-        <input #box
-                  [(ngModel)]="inputValue"
-                  (ngModelChange)="onKey()"
-                  (keyup.enter)="checkValidInput()"
-                  placeholder="Enter or paste your text here to check it..."
-                  style="font-family: 'Roboto', sans-serif;">
-      <p>
-        <span *ngFor="let word of WordObservable | async">{{word.text}} </span>
-      </p>
-    </div>
+  <div class="text-box" id="text-area">
+    <form action="submit" (ngSubmit)="checkValidInput()">
+      <input #box
+             [formControl]="formInput"
+             (keyup.enter)="checkValidInput()"
+             placeholder="Enter or paste your text here to check it..."
+             style="font-family: 'Roboto', sans-serif;">
+    </form>
+
+    <p>
+        <span *ngFor="let word of WordObservable | async"
+              class="word"
+              (mouseover)="showAutoCorrect(word)"
+              (mouseleave)="hideAutoCorrect()"
+              [class.special-char]="word.specialChar"
+              [class.error-1]="word.error == 1"
+              [class.error-2]="word.error == 2"
+        >{{word.text}}
+        </span>
+    </p>
+
+    <ng-container *ngIf="dataCorrect">
+      <div class="auto-correct">
+        <span
+          [class.error-1]="dataCorrect.error == 1"
+          [class.error-2]="dataCorrect.error == 2"
+        >{{dataCorrect.text}}</span> -> <span class="correct-word">
+        {{dataCorrect.correct_word}}
+      </span>
+      </div>
+    </ng-container>
+  </div>
 </div>

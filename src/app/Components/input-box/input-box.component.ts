@@ -1,9 +1,8 @@
-import {Component, ContentChild, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {debounce} from 'lodash'
-import {BehaviorSubject, Observable, of, Subject} from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {switchMap} from "rxjs/operators";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-input-box',
@@ -12,24 +11,21 @@ import {switchMap} from "rxjs/operators";
 })
 export class InputBoxComponent implements OnInit {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   wordSubject: BehaviorSubject<any> = new BehaviorSubject([]);
   words: Observable<any> = of([]);
-  showRightIcon: boolean = false;
   inputValue: string = 'hello';
+  formInput: FormControl = new FormControl('we is champion.');
+  dataCorrect: any;
 
   ngOnInit(): void {
-    let words = this.inputValue.split(' ')
-    let wordFormatted = [];
-    for (let word of words) {
-      wordFormatted.push({
-        text: word,
-        error: 0
-      })
-    }
-    this.wordSubject.next(wordFormatted);
+    this.parseStringToArray(this.formInput.value);
 
+    this.formInput.valueChanges.subscribe((value: string) => {
+      this.parseStringToArray(value);
+    });
   }
 
   onKey() {
@@ -37,11 +33,9 @@ export class InputBoxComponent implements OnInit {
   }
 
   checkValidInput() {
-    console.log(123)
     this.http.post(environment.Endpoint, {
       entries: this.wordSubject.value
     }).toPromise().then((res: any) => {
-      console.log(res)
       this.wordSubject.next(res.entries || [])
     })
   }
@@ -53,21 +47,31 @@ export class InputBoxComponent implements OnInit {
 
   parseStringToArray(data: string) {
     if (data) {
-
       let words = data.split(' ');
       let wordsFormatted = [];
       for (let work of words) {
-        wordsFormatted.push({text: work, error: 0});
+        if (!work) {
+          continue;
+        }
+        let format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+        wordsFormatted.push({text: work, error: 0, specialChar: format.test(work)})
       }
       this.wordSubject.next(wordsFormatted);
-      // if (pTag?.innerText) {
-      //   pTag.innerText = '';
-      // }
     }
   }
 
   get WordObservable(): Observable<any> {
     return this.wordSubject.asObservable()
+  }
+
+  showAutoCorrect(data: any) {
+    if (data.error) {
+      this.dataCorrect = data;
+    }
+  }
+
+  hideAutoCorrect() {
+    this.dataCorrect = null;
   }
 
 }

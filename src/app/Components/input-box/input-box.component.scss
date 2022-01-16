@@ -62,3 +62,47 @@ p {
         width: 600px;
     }
 }
+
+.word {
+  &:not(.special-char) {
+    margin-right: 3px;
+  }
+
+  &.error-1, &.error-2 {
+    border-bottom: 2px solid;
+  }
+
+  &.error-1 {
+    border-color: red;
+  }
+
+  &.error-2 {
+    border-color: blue;
+  }
+}
+
+
+
+.auto-correct {
+  background: white;
+
+  span {
+    color: white;
+  }
+
+  .error-1, &.error-2 {
+    border-bottom: 2px solid;
+  }
+
+  .error-1 {
+    background: red;
+  }
+
+  .error-2 {
+    background: blue;
+  }
+
+  .correct-word {
+    background: green;
+  }
+}
