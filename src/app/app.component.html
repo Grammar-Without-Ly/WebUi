@@ -2,7 +2,12 @@
     <div class="item1">
         <app-header></app-header>
     </div>
+
+    <div class="loader" *ngIf="isLoading">
+      loading...
+    </div>
+
     <div class="item3">
-        <app-input-box></app-input-box>
+        <app-input-box (toggleLoading)="toggleLoading()"></app-input-box>
     </div>
 </div>

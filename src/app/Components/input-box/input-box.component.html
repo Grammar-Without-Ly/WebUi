@@ -8,7 +8,8 @@
              style="font-family: 'Roboto', sans-serif;">
     </form>
 
-    <p>
+    <div class="cover-response-text">
+      <p>
         <span *ngFor="let word of WordObservable | async"
               class="word"
               (mouseover)="showAutoCorrect(word)"
@@ -18,15 +19,16 @@
               [class.error-2]="word.error == 2"
         >{{word.text}}
         </span>
-    </p>
+      </p>
 
+    </div>
     <ng-container *ngIf="dataCorrect">
       <div class="auto-correct">
         <span
           [class.error-1]="dataCorrect.error == 1"
           [class.error-2]="dataCorrect.error == 2"
-        >{{dataCorrect.text}}</span> -> <span class="correct-word">
-        {{dataCorrect.correct_word}}
+        >{{dataCorrect?.text}}</span> -> <span class="correct-word">
+        {{dataCorrect?.correct_word}}
       </span>
       </div>
     </ng-container>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BehaviorSubject, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
@@ -14,6 +14,8 @@ export class InputBoxComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
+  @Output() toggleLoading = new EventEmitter<any>();
+
   wordSubject: BehaviorSubject<any> = new BehaviorSubject([]);
   words: Observable<any> = of([]);
   inputValue: string = 'hello';
@@ -25,11 +27,8 @@ export class InputBoxComponent implements OnInit {
 
     this.formInput.valueChanges.subscribe((value: string) => {
       this.parseStringToArray(value);
+      this.toggleLoadingFunc(true)
     });
-  }
-
-  onKey() {
-    this.parseStringToArray(this.inputValue)
   }
 
   checkValidInput() {
@@ -37,6 +36,7 @@ export class InputBoxComponent implements OnInit {
       entries: this.wordSubject.value
     }).toPromise().then((res: any) => {
       this.wordSubject.next(res.entries || [])
+      this.toggleLoadingFunc()
     })
   }
 
@@ -73,5 +73,10 @@ export class InputBoxComponent implements OnInit {
   hideAutoCorrect() {
     this.dataCorrect = null;
   }
+
+  toggleLoadingFunc(value: boolean = true) {
+    this.toggleLoading.next(value)
+  }
+
 
 }

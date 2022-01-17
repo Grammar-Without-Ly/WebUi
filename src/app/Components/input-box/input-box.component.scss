@@ -50,6 +50,7 @@ input {
   padding: 0.5rem;
   border-bottom: 1px solid #fff;
   transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
   &:focus {
     border-bottom: 1px solid #fff;
   }
@@ -120,4 +121,8 @@ input {
   .correct-word {
     background: green;
   }
+}
+
+.cover-response-text {
+  width: 100%;
 }
